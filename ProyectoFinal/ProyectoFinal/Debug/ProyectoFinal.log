@@ -1,1 +1,13 @@
-﻿  ProyectoFinal.vcxproj -> D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\Debug\ProyectoFinal.exe
+﻿  Proyecto.cpp
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(177,30): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(150,38): warning C4101: 'nrChannels': variable local sin referencia
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(150,9): warning C4101: 'textureWidth': variable local sin referencia
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(152,20): warning C4101: 'image': variable local sin referencia
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(150,23): warning C4101: 'textureHeight': variable local sin referencia
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(301,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(302,17): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(306,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(307,21): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(309,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\ProyectoFinal\Proyecto.cpp(310,13): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+  ProyectoFinal.vcxproj -> D:\ProyectoCompu\316161927_Proyecto_Gpo12\ProyectoFinal\Debug\ProyectoFinal.exe

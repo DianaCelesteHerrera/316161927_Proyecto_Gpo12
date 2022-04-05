@@ -143,7 +143,7 @@ int main( )
     glEnableVertexAttribArray(2);
 
     // Load textures
-    Model bed((char*)"Models/Vase/vase.obj");
+    Model bed((char*)"Models/Desk/desk.obj");
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
