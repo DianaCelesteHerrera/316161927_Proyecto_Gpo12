@@ -255,7 +255,7 @@ void DoMovement( )
         camera.ProcessKeyboard( RIGHT, deltaTime );
     }
 
-    if (keys[GLFW_KEY_O])
+   /* if (keys[GLFW_KEY_O])
     {
         if (rot == 0.0f && poke == false) {
             rot += 45.0f;
@@ -265,7 +265,7 @@ void DoMovement( )
             rot -= 45.0f;
             poke = false;
         }
-    }
+    }*/
 
 }
 
