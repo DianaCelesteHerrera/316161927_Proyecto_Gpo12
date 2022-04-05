@@ -56,18 +56,6 @@ public:
 		return glm::lookAt(this->position, this->position + this->front, this->up);
 	}
 
-	void Recorrido(GLfloat xOffset)//Modifica la rotación recibiendo el ángulo
-	{
-		this->yaw = xOffset;
-		this->updateCameraVectors();
-	}
-
-	void MovimientoAutomatico(GLfloat velocidad) //Realiza un movimiento automatico hacia adelante
-	{
-		this->position += this->front * velocidad;
-	}
-
-
 	// Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
 	void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 	{
@@ -121,7 +109,6 @@ public:
 		this->updateCameraVectors();
 	}
 
-	
 	// Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
 	void ProcessMouseScroll(GLfloat yOffset)
 	{
