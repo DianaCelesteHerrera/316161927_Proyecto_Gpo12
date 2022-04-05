@@ -1,5 +1,6 @@
 
 *.recipe
+.vs/
 ProyectoFinal/.vs/*.*
 ProyectoFinal/ProyectoFinal/Debug/*.*
 ProyectoFinal/ProyectoFinal/v16/*.*
