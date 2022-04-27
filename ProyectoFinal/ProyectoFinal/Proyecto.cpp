@@ -39,7 +39,6 @@ bool firstMouse = true;
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
-bool poke = false;
 
 
 int main( )
@@ -54,7 +53,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Proyecto", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica 7", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -95,29 +94,13 @@ int main( )
     Shader lampshader( "Shaders/lamp.vs", "Shaders/lamp.frag" );
     
 
-
-
     // Load models
-    /*Model Pizza((char*)"Models/Pizza/PizzaSteve.obj");
-    Model brader((char*)"Models/Pizza/brader.obj");*/
+    Model fachada((char*)"Models/Fachada/fachada2.obj");
+    Model desk((char*)"Models/Desk/desk.obj");
+    Model col((char*)"Models/Comlumpio/columpio.obj");
+    Model silla((char*)"Models/Silla/silla.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
-    GLfloat vertices[] =
-    {
-        // positions          // colors           // texture coords
-     1.0f, 0.0f, 0.0f,   0.0f, 0.0f,   // top right
-     0.0f, 1.0f, 0.0f,   0.0f, 0.0f,   // bottom right
-     0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-     1.0f, 1.0f, 0.0f,   0.0f, 0.0f    // top left 
-
-    };
-
-    GLuint indices[] =
-    {  // Note that we start from 0!
-        0,1,3,
-        1,2,3
-
-    };
 
     // First, set the container's VAO (and VBO)
     GLuint VBO, VAO, EBO;
@@ -125,13 +108,7 @@ int main( )
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+  
     // Position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
@@ -142,34 +119,7 @@ int main( )
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
-    // Load textures
-    Model bed((char*)"Models/Cuadros/cuadros.obj");
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    int textureWidth, textureHeight, nrChannels;
-    stbi_set_flip_vertically_on_load(true);
-    unsigned char* image;
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-  
-    /*image = stbi_load("images/linux.png", &textureWidth, &textureHeight, &nrChannels, 0);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    if (image)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(image);*/
-
-
+    
     // Game loop
     while (!glfwWindowShouldClose(window))
     {
@@ -187,35 +137,26 @@ int main( )
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader.Use();
-
         glm::mat4 view = camera.GetViewMatrix();
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-        // Draw the loaded model
+        //model fachada
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //glDrawElements(GL_TRIANGLES, 6, GL_FLAT, 0);
-        //Pizza.Draw(shader);
+        model = glm::mat4(1);
+        fachada.Draw(shader);
 
-        model = glm:: mat4(1);
-        model = glm::rotate(model, glm::radians(-rot), glm::vec3(1.0f, 0.0f, 0.0f));
+        //model desk
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-6.052f, 2.982f, -5.754f));
+        model = glm::scale(model, glm::vec3(0.195f, 0.195f, 0.195f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //brader.Draw(shader);
+        desk.Draw(shader);
 
-     
+        //model silla 
 
-        bed.Draw(shader);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        lampshader.Use();
-        //glm::mat4 model(1);
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    
         glBindVertexArray(0);
 
         // Swap the buffers
@@ -255,7 +196,7 @@ void DoMovement( )
         camera.ProcessKeyboard( RIGHT, deltaTime );
     }
 
-   /* if (keys[GLFW_KEY_O])
+    /*if (keys[GLFW_KEY_O])
     {
         if (rot == 0.0f && poke == false) {
             rot += 45.0f;
