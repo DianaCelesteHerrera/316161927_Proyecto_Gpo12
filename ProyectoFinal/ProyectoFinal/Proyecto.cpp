@@ -53,7 +53,7 @@ int main( )
     glfwWindowHint( GLFW_RESIZABLE, GL_FALSE );
     
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Practica 7", nullptr, nullptr );
+    GLFWwindow *window = glfwCreateWindow( WIDTH, HEIGHT, "Proyecto", nullptr, nullptr );
     
     if ( nullptr == window )
     {
@@ -97,8 +97,12 @@ int main( )
     // Load models
     Model fachada((char*)"Models/Fachada/fachada2.obj");
     Model desk((char*)"Models/Desk/desk.obj");
-    //Model col((char*)"Models/Comlumpio/columpio.obj");
-    //Model silla((char*)"Models/Silla/silla.obj");
+    Model cuadro((char*)"Models/Cuadros/cuadros.obj");
+    Model cama((char*)"Models/Bed/bed.obj");
+    Model silla((char*)"Models/Silla/silla.obj");
+    Model aire((char*)"Models/Aire/aire.obj");
+    Model mesa((char*)"Models/Mesa/mesa.obj");
+    Model repisa((char*)"Models/Repisa/repisa.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
@@ -147,16 +151,57 @@ int main( )
         model = glm::mat4(1);
         fachada.Draw(shader);
 
-        //model desk
+        ////model desk
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-6.052f, 2.982f, -5.754f));
-        model = glm::scale(model, glm::vec3(0.195f, 0.195f, 0.195f));
+        model = glm::translate(model, glm::vec3(-3.618f, 2.974f, -3.1f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.151f, 0.132f, 0.209f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         desk.Draw(shader);
 
-        //model silla 
+        ////model cama
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-5.882f, 3.036f, -3.971f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.196f, 0.186f,0.232f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cama.Draw(shader);
 
-    
+        //model cuadros
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-7.065f, 4.33f, -3.908f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
+        model = glm::scale(model, glm::vec3(0.106f, 0.106f, 0.106f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cuadro.Draw(shader);
+
+        //silla
+       /* model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-6.052f, 2.982f, -5.754f));
+        model = glm::scale(model, glm::vec3(0.195f, 0.195f, 0.195f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        silla.Draw(shader);*/
+
+        //aire acondicionado
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-2.898f, 4.576f, -4.033f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
+        model = glm::scale(model, glm::vec3(0.119f, 0.119f, 0.119f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        aire.Draw(shader);
+
+        //mesa
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.075f, 0.265f, 3.39f));
+        model = glm::scale(model, glm::vec3(0.215f, 0.215f, 0.215f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        mesa.Draw(shader);
+
+       /* repisa
+        model = glm::mat4(1);
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        repisa.Draw(shader);
+    */
         glBindVertexArray(0);
 
         // Swap the buffers
@@ -248,7 +293,7 @@ void MouseCallback( GLFWwindow *window, double xPos, double yPos )
     GLfloat yOffset = lastY - yPos;  // Reversed since y-coordinates go from bottom to left
     
     lastX = xPos;
-    lastY = yPos;
+    lastY =  yPos;
     
     camera.ProcessMouseMovement( xOffset, yOffset );
 }
