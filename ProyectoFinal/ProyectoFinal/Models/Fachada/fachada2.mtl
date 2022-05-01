@@ -319,6 +319,111 @@ Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd pared2.jpg
 Ni 1.00
+newmtl lambert79SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
+newmtl lambert80SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
+newmtl lambert82SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
+newmtl lambert84SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
+newmtl lambert85SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd pared2.jpg
+Ni 1.00
+newmtl lambert86SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd paredcuarto.jpg
+Ni 1.00
+newmtl lambert88SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd pared.jpg
+Ni 1.00
+newmtl lambert91SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd gris.jpg
+Ni 1.00
+newmtl lambert92SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd techogris.jpg
+Ni 1.00
+newmtl lambert94SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
+newmtl lambert96SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd marron.jpg
+Ni 1.00
+newmtl lambert97SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd marron.jpg
+Ni 1.00
+newmtl lambert98SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd madera.jpg
+Ni 1.00
+newmtl lambert100SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd marron.jpg
+Ni 1.00
+newmtl lambert101SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd vidrio.jpg
+Ni 1.00
 newmtl pasted__lambert3SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -2455,3 +2560,35 @@ Tf 1.00 1.00 1.00
 Ni 1.00
 Ks 1.00 1.00 1.00
 Ns 50.00
+newmtl window39:glass_border1
+illum 4
+Kd 0.78 0.78 0.78
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 45.00
+newmtl window39:window1
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.44 0.44 0.44
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 55.00
+newmtl window39:window3
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.44 0.44 0.44
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 55.00
+newmtl window40:glass_border1
+illum 4
+Kd 0.78 0.78 0.78
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 45.00
