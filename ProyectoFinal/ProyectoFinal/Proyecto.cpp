@@ -97,8 +97,8 @@ int main( )
     // Load models
     Model fachada((char*)"Models/Fachada/fachada2.obj");
     Model desk((char*)"Models/Desk/desk.obj");
-    Model col((char*)"Models/Comlumpio/columpio.obj");
-    Model silla((char*)"Models/Silla/silla.obj");
+    //Model col((char*)"Models/Comlumpio/columpio.obj");
+    //Model silla((char*)"Models/Silla/silla.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
