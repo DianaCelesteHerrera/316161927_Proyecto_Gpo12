@@ -252,6 +252,12 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         libro.Draw(shader);
 
+        ////juguete de ratoncito carro para animar
+        //model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(-3.611f, 4.741f, -10.96f));
+        //model = glm::scale(model, glm::vec3(0.047f, 0.047f, 0.047f));
+        //glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        //raton.Draw(shader);
 
         glBindVertexArray(0);
 
