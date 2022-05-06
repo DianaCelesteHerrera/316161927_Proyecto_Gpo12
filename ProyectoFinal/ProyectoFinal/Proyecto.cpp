@@ -118,6 +118,7 @@ int main( )
     Model lap((char*)"Models/Laptop/laptop.obj");
     Model patin((char*)"Models/Patineta/patineta.obj");
     Model regadera((char*)"Models/Regadera/regadera.obj");
+    Model libro((char*)"Models/Libro/book.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
@@ -243,6 +244,13 @@ int main( )
         model = glm::scale(model, glm::vec3(0.161f, 0.161f, 0.161f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         regadera.Draw(shader);
+
+        //libro para animar
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-3.197f, 6.672f , -2.662f));
+        model = glm::scale(model, glm::vec3(0.061f, 0.061f, 0.061f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        libro.Draw(shader);
 
 
         glBindVertexArray(0);
