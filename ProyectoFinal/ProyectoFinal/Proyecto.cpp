@@ -115,7 +115,6 @@ int main( )
     Model aire((char*)"Models/Aire/aire.obj");
     Model repisa((char*)"Models/Repisa/repisa.obj");
     Model planta((char*)"Models/Planta/planta.obj");
-    Model planta2((char*)"Models/Planta2/planta2.obj");
     Model lap((char*)"Models/Laptop/laptop.obj");
     Model patin((char*)"Models/Patineta/patineta.obj");
     Model regadera((char*)"Models/Regadera/regadera.obj");
@@ -222,13 +221,6 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         planta.Draw(shader);
 
-        //planta 2
-        model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-3.31f, 6.706f, -11.815f));
-        model = glm::scale(model, glm::vec3(0.109f, 0.109f, 0.109f));
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        planta2.Draw(shader);
-  
         //laptop
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-3.356f, 5.81f, -4.059f));
