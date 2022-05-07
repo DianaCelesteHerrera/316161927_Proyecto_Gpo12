@@ -33,50 +33,61 @@ void DoMovement( );
 void animacionR();
 
 
-// Camera
+// Camara
 Camera camera( glm::vec3( 0.0f, 5.0f, 20.0f ) );
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
+//Declaracion de las variables
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
 bool anim;
+
+//Declaracion variables animacion sencilla silla escritorio
 float transilla = 0.0f; 
 bool acsilla;
 float rotsilla = 0.0f;
+
+//Declaracio variables animacion sencilla patineta
 float transpat = 0.0f;
 float rotpat = 0.0f;
 bool acpat;
+
+//Declaracion variables regadera
 float rotreg = 0.0f;
 float transreg = 0.0f;
 bool acreg;
+
+//Declaracion de variables animacion sencilla libro
 float transBookX = 0.0f;
 float transBookY = 0.0f;
 float transBookZ = 0.0f;
 float rotBook = 0.0f;
 bool acbook;
 
-// Regadera
+// Declaracion variables animacion Regadera
 float movKitXReg = 0.0;
 float movKitYReg = 0.0;
 float movKitZReg = 0.0;
 float rotKitReg = 0.0;
 
+// variable del tiempo para oscilacion de la regadera
 float tiempo;
-
 bool circuitoReg1;
 
 bool recorrido1 = true;
 bool recorrido2 = false;
 bool recorrido3 = false;
 
-// Rataalada
+//Declaracion de variables para juguete raton animacion compleja
+
 float v0y = 0.0;
 float v0z = 0.0;
 float rotKitRat = 0.0;
 
+//se usaron para implementar tiro parabolico 
 bool circuitoRat1;
 bool circuitoRat2;
 
@@ -140,7 +151,7 @@ int main( )
     Shader lampshader( "Shaders/lamp.vs", "Shaders/lamp.frag" );
     
 
-    // Load models
+    // Carga de modelos 
     Model fachada((char*)"Models/Fachada/fachada2.obj");
     Model desk((char*)"Models/Desk/desk.obj");
     Model cuadro((char*)"Models/Cuadros/cuadros.obj");
@@ -192,18 +203,24 @@ int main( )
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        //camara
         shader.Use();
         glm::mat4 view = camera.GetViewMatrix();
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
+
+
+        /*Carga de los modelos dentro de la fachada, usando traslacion, rotacion,
+        escalamiento para acomodar todo el entorno*/
+      
         //model fachada
         glm::mat4 model(1);
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         model = glm::mat4(1);
         fachada.Draw(shader);
 
-        ////model desk
+        //modelo escritorio 
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-3.759f, 4.631f, -3.53f));
         model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -211,7 +228,7 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         desk.Draw(shader);
 
-        ////model cama
+        //modelo cama 
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-7.228f, 4.761f, -4.335f));
         model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -227,13 +244,6 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cuadro.Draw(shader);
 
-        //silla
-        model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-3.863f+transilla, 4.73f, -4.14f));
-        model = glm::rotate(model, glm::radians(90.0f+rotsilla), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(0.129f, 0.129f, 0.129f));
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        silla.Draw(shader);
 
         //aire acondicionado
         model = glm::mat4(1);
@@ -265,6 +275,18 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         lap.Draw(shader);
        
+
+       /*CARGA MODELOS ANIMACIONES SENCILLAS
+       sencillas ya que solo estamos incrementando linealmente*/
+        
+       //silla de escritorio
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-3.863f + transilla, 4.73f, -4.14f));
+        model = glm::rotate(model, glm::radians(90.0f + rotsilla), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.129f, 0.129f, 0.129f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        silla.Draw(shader);
+
         //patineta
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-8.23f, 4.731f, -8.12f+transpat)); 
@@ -272,15 +294,6 @@ int main( )
         model = glm::scale(model, glm::vec3(0.113f, 0.113f, 0.113f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         patin.Draw(shader);
-
-        //regadera
-        tiempo = glfwGetTime();
-        model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-11.209f, 0.782f, 0.94f) + glm::vec3(movKitXReg, movKitYReg, movKitZReg));
-        model = glm::rotate(model, glm::radians(rotKitReg), glm::vec3(1.0f, 0.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(0.161f, 0.161f, 0.161f));
-        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        regadera.Draw(shader);
 
         //libro para animar
         model = glm::mat4(1);
@@ -290,7 +303,21 @@ int main( )
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         libro.Draw(shader);
 
-        ////juguete de ratoncito carro para animar
+
+        /*CARGA DE MODELOS ANIMACIONES COMPLEJAS */
+        //regadera se uso la variable tiempo para que oscile y de vueltas en su eje
+        tiempo = glfwGetTime();
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-11.209f, 0.782f, 0.94f) + glm::vec3(movKitXReg, movKitYReg, movKitZReg));
+        model = glm::rotate(model, glm::radians(rotKitReg), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.161f, 0.161f, 0.161f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        regadera.Draw(shader);
+
+      
+        /*juguete de ratoncito carro
+        este se implemento con tiro parabolico con coordenadas v0y y v0z, donde 
+        vemos en y max */
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(-3.611f, 4.741f, -10.96f) + glm::vec3(0, v0y, v0z));
         model = glm::rotate(model, glm::radians(rotKitRat), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -301,8 +328,6 @@ int main( )
         glBindVertexArray(0);
 
        
-
-
         // Swap the buffers
         glfwSwapBuffers( window );
     }
@@ -362,7 +387,7 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
         }
     }
 
-    
+    //animacion silla de escritorio
 
     if (keys[GLFW_KEY_R]) {
         acsilla = !acsilla;
@@ -376,25 +401,28 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
         }
     }
 
+    //animacion patineta
+
     if (keys[GLFW_KEY_T]) {
-        acpat = !acpat;
+        acpat = !acpat;   
         if (acpat) {
-            transpat -= 2.0f;
-            rotpat -= 45.0f;
+            transpat -= 2.0f;   //translate funcion 
+            rotpat -= 45.0f;    //rotate funcion 
         }
         else {
-            transpat += 2.0f;
-            rotpat += 45.0f; 
+            transpat += 2.0f;  //translate funcion
+            rotpat += 45.0f;   //rotate funcion de patineta
         }
     }
 
+    //animacion de libro
     if (keys[GLFW_KEY_Y]) {
         acbook = !acbook;
         if (acbook) {
-            transBookX -= 0.5f;
-            transBookZ -= 0.338;
-            transBookY -= 0.847;
-            rotBook += 90.0f;
+            transBookX -= 0.5f;   //translate funcion eje Y
+            transBookZ -= 0.338;  //translate funcion eje Z
+            transBookY -= 0.847;  //translate funcion eje Y
+            rotBook += 90.0f;     //rotacion del libro
         }
         else {
             transBookX += 0.5f;
@@ -404,26 +432,30 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
         }
     }
 
+    //animacion regadera de plantas
     if (keys[GLFW_KEY_Z]) {
         if (circuitoReg1)
         {
-            circuitoReg1 = false;
+            circuitoReg1 = false;   //para recorrido 1 
         }
         else
         {
-            circuitoReg1 = true;
+            circuitoReg1 = true;    //se desactiva recorrido
         }
     }
+
+
+    //animacion ratoncito de juguete
     
     if (keys[GLFW_KEY_X]) {
         if (circuitoRat1)
         {
-            circuitoRat1 = false;
-            circuitoRat2 = true;
+            circuitoRat1 = false;   //se desactiva recorrido 1
+            circuitoRat2 = true;    //se activa recorrido 2 para juguete
         }
         else
         {
-            circuitoRat1 = true;
+            circuitoRat1 = true;    //para que regrese posicion original
             circuitoRat2 = false;
         }
     }
@@ -432,13 +464,13 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
 
 void animacionR()
 {
-    // Movimiento de la regadera
+    // Movimiento de la regadera usando la variable tiempo para oscilar 
     if (circuitoReg1)
     {
         if (recorrido1)
         {
-            movKitYReg += 0.5f;
-            if (movKitYReg < 1.5)
+            movKitYReg += 0.5f;       
+            if (movKitYReg < 1.5)     
             {
                 recorrido1 = false;
                 recorrido2 = true;
@@ -461,6 +493,8 @@ void animacionR()
         }
     }
 
+
+    //movimiento de ratoncito usando tiro parabolico
     if (circuitoRat1)
     {
         if (recorrido4)
@@ -468,7 +502,7 @@ void animacionR()
             rotKitRat = 0;
             v0y += 0.5f;
             v0z += 0.5f;
-            if (v0z > 1.5 || v0y > 1.5)
+            if (v0z > 1.5 || v0y > 1.5)   //calcule la altura maxima del raton 
             {
                 recorrido4 = false;
                 recorrido5 = true;
@@ -478,7 +512,7 @@ void animacionR()
         {
             v0y -= 0.5f;
             v0z += 0.5f;
-            if (v0z > 3.5 || v0y < 0.0)
+            if (v0z > 3.5 || v0y < 0.0)   //altura va auementando cuando cae 
             {
                 recorrido5 = false;
                 recorrido6 = true;
@@ -490,7 +524,7 @@ void animacionR()
     {
         if (recorrido6)
         {
-            rotKitRat = 180;
+            rotKitRat = 180;     //regresando el raton a su posicion inicial
             v0z -= 0.5f;
             if (v0z < 0.5)
             {
