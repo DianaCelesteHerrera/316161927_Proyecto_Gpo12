@@ -1,5 +1,7 @@
 // Std. Includes
 #include <string>
+#include <iostream>
+#include <cmath>
 
 // GLEW
 #include <GL/glew.h>
@@ -28,10 +30,11 @@ int SCREEN_WIDTH, SCREEN_HEIGHT;
 void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mode );
 void MouseCallback( GLFWwindow *window, double xPos, double yPos );
 void DoMovement( );
+void animacionR();
 
 
 // Camera
-Camera camera( glm::vec3( 0.0f, 0.0f, 3.0f ) );
+Camera camera( glm::vec3( 0.0f, 5.0f, 20.0f ) );
 bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
@@ -49,7 +52,38 @@ bool acpat;
 float rotreg = 0.0f;
 float transreg = 0.0f;
 bool acreg;
+float transBookX = 0.0f;
+float transBookY = 0.0f;
+float transBookZ = 0.0f;
+float rotBook = 0.0f;
+bool acbook;
 
+// Regadera
+float movKitXReg = 0.0;
+float movKitYReg = 0.0;
+float movKitZReg = 0.0;
+float rotKitReg = 0.0;
+
+float tiempo;
+
+bool circuitoReg1;
+
+bool recorrido1 = true;
+bool recorrido2 = false;
+bool recorrido3 = false;
+
+// Rataalada
+float v0y = 0.0;
+float v0z = 0.0;
+float rotKitRat = 0.0;
+
+bool circuitoRat1;
+bool circuitoRat2;
+
+bool recorrido4 = true;
+bool recorrido5 = false;
+bool recorrido6 = false;
+bool recorrido7 = false;
 
 
 
@@ -119,6 +153,7 @@ int main( )
     Model patin((char*)"Models/Patineta/patineta.obj");
     Model regadera((char*)"Models/Regadera/regadera.obj");
     Model libro((char*)"Models/Libro/book.obj");
+    Model raton((char*)"Models/Juguete/juguete.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
@@ -151,6 +186,7 @@ int main( )
         // Check and call events
         glfwPollEvents();
         DoMovement();
+        animacionR();
 
         // Clear the colorbuffer
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -238,26 +274,29 @@ int main( )
         patin.Draw(shader);
 
         //regadera
+        tiempo = glfwGetTime();
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-9.868f, 0.782f+ transreg, 0.94f));
-        model = glm::rotate(model, glm::radians(rotreg), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(-11.209f, 0.782f, 0.94f) + glm::vec3(movKitXReg, movKitYReg, movKitZReg));
+        model = glm::rotate(model, glm::radians(rotKitReg), glm::vec3(1.0f, 0.0f, 0.0f));
         model = glm::scale(model, glm::vec3(0.161f, 0.161f, 0.161f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         regadera.Draw(shader);
 
         //libro para animar
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-3.197f, 6.672f , -2.662f));
+        model = glm::translate(model, glm::vec3(-3.197f + transBookX, 6.672f + transBookY, -2.662f + transBookZ));
+        model = glm::rotate(model, glm::radians(rotBook), glm::vec3(1.0f, 0.0f, 0.0f));
         model = glm::scale(model, glm::vec3(0.061f, 0.061f, 0.061f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         libro.Draw(shader);
 
         ////juguete de ratoncito carro para animar
-        //model = glm::mat4(1);
-        //model = glm::translate(model, glm::vec3(-3.611f, 4.741f, -10.96f));
-        //model = glm::scale(model, glm::vec3(0.047f, 0.047f, 0.047f));
-        //glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //raton.Draw(shader);
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-3.611f, 4.741f, -10.96f) + glm::vec3(0, v0y, v0z));
+        model = glm::rotate(model, glm::radians(rotKitRat), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.047f, 0.047f, 0.047f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        raton.Draw(shader);
 
         glBindVertexArray(0);
 
@@ -350,18 +389,116 @@ void KeyCallback( GLFWwindow *window, int key, int scancode, int action, int mod
     }
 
     if (keys[GLFW_KEY_Y]) {
-        acreg = !acreg;
-        if (acreg) {
-            transreg -= 1.0f;
-            rotreg -= 45.0f;
+        acbook = !acbook;
+        if (acbook) {
+            transBookX -= 0.5f;
+            transBookZ -= 0.338;
+            transBookY -= 0.847;
+            rotBook += 90.0f;
         }
         else {
-            transreg += 1.0f;
-            rotreg += 45.0f;
+            transBookX += 0.5f;
+            transBookZ += 0.338;
+            transBookY += 0.847;
+            rotBook -= 90.0f;
         }
     }
- 
- 
+
+    if (keys[GLFW_KEY_Z]) {
+        if (circuitoReg1)
+        {
+            circuitoReg1 = false;
+        }
+        else
+        {
+            circuitoReg1 = true;
+        }
+    }
+    
+    if (keys[GLFW_KEY_X]) {
+        if (circuitoRat1)
+        {
+            circuitoRat1 = false;
+            circuitoRat2 = true;
+        }
+        else
+        {
+            circuitoRat1 = true;
+            circuitoRat2 = false;
+        }
+    }
+    
+}
+
+void animacionR()
+{
+    // Movimiento de la regadera
+    if (circuitoReg1)
+    {
+        if (recorrido1)
+        {
+            movKitYReg += 0.5f;
+            if (movKitYReg < 1.5)
+            {
+                recorrido1 = false;
+                recorrido2 = true;
+            }
+        }
+        if (recorrido2)
+        {
+            rotKitReg = -60;
+            movKitZReg -= 0.5f;
+            if (movKitZReg < -2.0)
+            {
+                recorrido2 = false;
+                recorrido3 = true;
+            }
+        }
+        if (recorrido3)
+        {
+            movKitZReg = sin(tiempo + 5);
+            movKitXReg = sin(tiempo);
+        }
+    }
+
+    if (circuitoRat1)
+    {
+        if (recorrido4)
+        {
+            rotKitRat = 0;
+            v0y += 0.5f;
+            v0z += 0.5f;
+            if (v0z > 1.5 || v0y > 1.5)
+            {
+                recorrido4 = false;
+                recorrido5 = true;
+            }
+        }
+        if (recorrido5)
+        {
+            v0y -= 0.5f;
+            v0z += 0.5f;
+            if (v0z > 3.5 || v0y < 0.0)
+            {
+                recorrido5 = false;
+                recorrido6 = true;
+            }
+        }
+    }
+    
+    if (circuitoRat2)
+    {
+        if (recorrido6)
+        {
+            rotKitRat = 180;
+            v0z -= 0.5f;
+            if (v0z < 0.5)
+            {
+                recorrido6 = false;
+                recorrido4 = true;
+            }
+        }
+    }
 }
 
 void MouseCallback( GLFWwindow *window, double xPos, double yPos )
