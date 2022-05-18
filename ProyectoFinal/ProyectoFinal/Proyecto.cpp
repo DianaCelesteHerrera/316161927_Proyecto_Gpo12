@@ -165,6 +165,7 @@ int main( )
     Model regadera((char*)"Models/Regadera/regadera.obj");
     Model libro((char*)"Models/Libro/book.obj");
     Model raton((char*)"Models/Juguete/juguete.obj");
+    Model raton((char*)"Models/Tapete/tapete.obj");
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
