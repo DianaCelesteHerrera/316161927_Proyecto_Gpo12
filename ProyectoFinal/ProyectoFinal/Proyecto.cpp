@@ -171,6 +171,10 @@ int main( )
     Model mesita((char*)"Models/Mesita/mesita.obj");
     Model lampara((char*)"Models/Lampara/lampara.obj");
     Model muebletv((char*)"Models/Muebletv/muebletv.obj");
+    Model tele((char*)"Models/Tele/tele.obj");
+    Model cuadros3((char*)"Models/Cuadros3/cuadros3.obj");
+    Model puerta((char*)"Models/Puerta/puerta.obj");
+    Model hamster((char*)"Models/Hamster/hamster.obj"); 
     glm::mat4 projection = glm::perspective( camera.GetZoom( ), ( float )SCREEN_WIDTH/( float )SCREEN_HEIGHT, 0.1f, 100.0f );
     
 
@@ -348,38 +352,42 @@ int main( )
 
         //muebletv
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-4.574f, 0.386f, -4.336f));
-        model = glm::scale(model, glm::vec3(0.435f, 0.651f, 0.211f));
+        model = glm::translate(model, glm::vec3(-8.064f, 0.205f, -3.233f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.801f, 0.801f, 0.624f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         muebletv.Draw(shader);
 
         //teletv
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-4.574f, 0.386f, -4.336f));
-        model = glm::scale(model, glm::vec3(0.435f, 0.651f, 0.211f));
+        model = glm::translate(model, glm::vec3(-8.388f, 1.476f, -3.804f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.13f, 0.13f, 0.13f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         tele.Draw(shader);
 
 
         //cuadros3
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-4.574f, 0.386f, -4.336f));
-        model = glm::scale(model, glm::vec3(0.435f, 0.651f, 0.211f));
+        model = glm::translate(model, glm::vec3(-8.984f, 2.117f, -3.894f));
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.219f, 0.219f, 0.219f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cuadros3.Draw(shader);
 
         //puerta
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-4.574f, 0.386f, -4.336f));
-        model = glm::scale(model, glm::vec3(0.435f, 0.651f, 0.211f));
+        model = glm::translate(model, glm::vec3(-8.877f, 0.367f, -1.032f));
+        model = glm::scale(model, glm::vec3(0.817f, 0.817f, 0.817f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         puerta.Draw(shader);
 
 
         //hamster
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-4.574f, 0.386f, -4.336f));
-        model = glm::scale(model, glm::vec3(0.435f, 0.651f, 0.211f));
+        model = glm::translate(model, glm::vec3(-3.602f, 0.379f, -2.313f));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.098f, 0.098f, 0.098f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         hamster.Draw(shader);
 
